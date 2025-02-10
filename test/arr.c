@@ -1,6 +1,40 @@
 #include<stdio.h>
 #include<math.h>
 
+double magnitude(double *a){
+    int i;
+    double c=0;
+    for(i=0;i<4;i++){
+        c+=pow(a[i],2);
+        printf("%lf\n",c);
+    }
+    c=sqrt(c);
+    return c;
+}
+
+void normalize(double *a){
+    int i;
+    double mag=magnitude(a);
+    for(i=0;i<4;i++){
+        a[i]=a[i]/mag;
+    }
+}
+
+double dotproduct(double *a,double *b){
+    int i;
+    double res;
+    for(i=0;i<4;i++){
+        res+=a[i]*b[i];
+    }
+    return res;
+}
+
+void crossproduct(double *a,double *b,double *c){
+    c[0]=(a[1]*b[2])-(a[2]*b[1]);
+    c[1]=(a[2]*b[0])-(a[0]*b[2]);
+    c[2]=(a[0]*b[1])-(a[1]*b[0]);
+    c[3]=0;
+}
 
 void scalar(double *a){
     int d,i;
@@ -90,13 +124,21 @@ void printarray(double *a){
     }
 }
 
+void cannon(double (*pos)[4],double (*eg)[4]){
+fillarray(pos[0]);
+fillarray(pos[1]);
+fillarray(eg[0]);
+fillarray(eg[1]);
+while(pos[0][2]!=0){
+arithmetic(pos[0],pos[1],pos[0]);
+arithmetic()
+}
+}
+
 void main(){
-    double a[4];
-    double b[4];
-    double c[4];
-    fillarray(a);
-   // fillarray(b);
-   // arithmetic(a,b,c);
-    scalar(a);
-    printarray(a);
+    double pos[1][4];
+    double eg [1][4];
+    //double eg[4];
+    //double ew[4];
+   
 }
