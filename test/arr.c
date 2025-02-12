@@ -61,21 +61,16 @@ void negate(double *a){
         a[i]=a[i]*-1;
 }
 
+void addition(double *a,double *b,double *c){
+    int i;
+    for(i=0;i<4;i++)
+        c[i]=a[i]+b[i];
+}
 
-void arithmetic(double *a,double *b,double *c){
-    int d,i;
-    printf("Addition[1] Subtraction[2]:");
-    scanf("%d",&d);
-        if(d==1){
-            for(i=0;i<4;i++)
-                c[i]=a[i]+b[i];
-        }
-        else if(d==2){
-            for(i=0;i<4;i++)
-                c[i]=a[i]-b[i];
-        }
-        else
-            printf("Enter an value between 1 and 2\n");
+void subtraction(double *a,double *b,double *c){
+    int i;
+    for(i=0;i<4;i++)
+        c[i]=a[i]-b[i];
 }
 
 
@@ -102,9 +97,35 @@ void fillarray(double *a){
     }
 }
 
+void filldoublearray(double a[2][4]){
+    int i,j;
+    for(i=0;i<2;i++){
+        for(j=0;j<4;j++){
+            switch(j){
+                case 0:
+                    printf("Enter the x-axis:");
+                    scanf("%lf",&a[i][j]);
+                    break;
+                case 1:
+                    printf("Enter the y-axis:");
+                    scanf("%lf",&a[i][j]);
+                    break;
+                case 2:
+                    printf("Enter the z-axis:");
+                    scanf("%lf",&a[i][j]);
+                    break;
+                case 3:
+                    printf("set '1' for point and '0' for vector:");
+                    scanf("%lf",&a[i][j]);
+                    break;
+            }
+        }
+    }
+}
+
 void printarray(double *a){
     for(int i=0;i<4;i++){
-         switch(i){
+        switch(i){
             case 0:
                 printf("X-axis:%lf\n",a[0]);
                 break;
@@ -116,29 +137,37 @@ void printarray(double *a){
                 break;
             case 3:
                 if(a[3]==0)
-                printf("It is a vector:%lf\n",a[3]);
+                    printf("It is a vector:%lf\n",a[3]);
                 else
-                printf("It is a point:%lf\n",a[3]);
+                    printf("It is a point:%lf\n",a[3]);
                 break;
         }
     }
 }
 
 void cannon(double (*pos)[4],double (*eg)[4]){
-fillarray(pos[0]);
-fillarray(pos[1]);
-fillarray(eg[0]);
-fillarray(eg[1]);
-while(pos[0][2]!=0){
-arithmetic(pos[0],pos[1],pos[0]);
-arithmetic()
-}
+    printf("Enter the projectile position\n");
+    filldoublearray(pos);
+    //printf("Enter the projectile velocity\n");
+    //fillarray(pos[1]);
+    printf("Enter the gravitational velocity\n");
+    filldoublearray(eg);
+    //printf("Enter the wind velocity\n");
+    //fillarray(eg[1]);
+    while(pos[0][2]!=0){
+        normalize(pos[1]);
+        addition(pos[0],pos[1],pos[0]);
+        addition(pos[1],eg[0],pos[1]);
+        addition(pos[1],eg[1],pos[1]);
+    }
+    printarray(pos[0]);
 }
 
 void main(){
     double pos[1][4];
     double eg [1][4];
     //double eg[4];
-    //double ew[4];
-   
+    //double ew[4]
+    cannon(pos,eg);
+
 }
