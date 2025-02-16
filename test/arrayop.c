@@ -1,5 +1,7 @@
 #include<stdio.h>
 
+//file contains every array based operations
+
 double magnitude(double *a){
     int i;
     double c=0;
